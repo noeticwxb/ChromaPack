@@ -56,13 +56,24 @@ class ChromaPackProcessor : AssetPostprocessor
         var i1 = 0;
         var i2 = 0;
 
+//        int iCrCb = 0;
+//        Texture2D texY = new Texture2D(tw,th, TextureFormat.Alpha8, false);
+//        Texture2D texCr = new Texture2D(tw / 2, th / 2, TextureFormat.Alpha8, false);
+//        Texture2D texCb = new Texture2D(tw / 2, th / 2, TextureFormat.Alpha8, false);
+//        var pixelsY = texY.GetPixels();
+//        var pixelsCr = texture.GetPixels();
+//        var pixelsCb = texture.GetPixels();
+//        
+
         if (hasAlpha)
         {
             for (var iy = 0; iy < th; iy++)
             {
                 for (var ix = 0; ix < tw; ix++)
                 {
-                    pixels[i2++].a = RGB_Ya(source[i1++]);
+//                    float aa = RGB_Ya(source[i1++]);
+//                    pixels[i2++].a = aa;
+//                    pixelsY[iCrCb++].a = aa;
                 }
                 i2 += tw / 2;
             }
@@ -73,7 +84,9 @@ class ChromaPackProcessor : AssetPostprocessor
             {
                 for (var ix = 0; ix < tw; ix++)
                 {
-                    pixels[i2++].a = RGB_Y(source[i1++]);
+//                    float aa = RGB_Ya(source[i1++]);
+//                    pixels[i2++].a = aa;
+//                    pixelsY[iCrCb++].a = aa;
                 }
                 i2 += tw / 2;
             }
@@ -83,6 +96,9 @@ class ChromaPackProcessor : AssetPostprocessor
         i2 = tw;
         var i3 = (tw * 3 / 2) * th / 2 + tw;
 
+
+//        iCrCb = 0;
+
         for (var iy = 0; iy < th / 2; iy++)
         {
             for (var ix = 0; ix < tw / 2; ix++)
@@ -91,6 +107,10 @@ class ChromaPackProcessor : AssetPostprocessor
                 pixels[i2++].a = RGB_Cr(ws) + 0.5f;
                 pixels[i3++].a = RGB_Cb(ws) + 0.5f;
                 i1 += 2;
+
+//                pixelsCr[iCrCb].a = RGB_Cr(ws) + 0.5f;
+//                pixelsCb[iCrCb].a = RGB_Cb(ws) + 0.5f;
+//                ++iCrCb;
             }
             i1 += tw;
             i2 += tw;
@@ -99,5 +119,17 @@ class ChromaPackProcessor : AssetPostprocessor
 
         texture.SetPixels(pixels);
         importer.isReadable = false;
+
+//        texCr.SetPixels(pixelsCr);
+//        texCb.SetPixels(pixelsCb);
+//        texY.SetPixels(pixelsY);
+
+        //Debug.Log(assetImporter.assetPath);
+
+//        System.IO.File.WriteAllBytes("C:\\texY.png", texY.EncodeToPNG());
+//        System.IO.File.WriteAllBytes("C:\\texCr.png", texCr.EncodeToPNG());
+//        System.IO.File.WriteAllBytes("C:\\texCb.png", texCb.EncodeToPNG());
+
+
     }
 }
